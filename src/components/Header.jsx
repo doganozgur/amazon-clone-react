@@ -10,13 +10,13 @@ export default function Header() {
   return (
     <header className="flex flex-col">
       {/* Top */}
-      <div className="flex items-center py-2 px-4 space-x-6 bg-amazonDarkBlue">
+      <div className="flex sm:items-center flex-col sm:flex-row py-2 px-4 sm:space-x-6 bg-amazonDarkBlue">
         {/* Left */}
         <Link to="/" className='hoverOutline'>
           <img src={Logo} alt="Logo" className='h-7' />
         </Link>
         {/* Center */}
-        <div className='flex flex-grow mx-3'>
+        <div className='flex flex-grow sm:mx-3'>
           {/* Searchbar */}
           <input type="text" className='flex-auto h-10 rounded-tl-md rounded-bl-md p-3' />
           <button className='bg-amazonOrange flex items-center rounded-tr-md rounded-br-md px-3'>
@@ -37,7 +37,7 @@ export default function Header() {
           </Link>
           {/* Cart */}
           <Link to="/checkout" className='flex items-end text-white hoverOutline relative'>
-            <span className='absolute top-0 left-3 bg-yellow-500 text-black rounded-full w-4 h-4 text-xs flex items-center justify-center'>{count.length}</span>
+            <span className='absolute top-0 left-3 bg-yellow-500 text-black rounded-full w-5 h-5 text-xs flex items-center justify-center'>{count.length}</span>
             <span className='text-xs font-medium'><BsCart3 className='text-3xl' /></span>
             <span className='text-sm font-bold'>Cart</span>
           </Link>

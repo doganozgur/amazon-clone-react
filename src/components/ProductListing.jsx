@@ -16,7 +16,7 @@ function ProductListing() {
     }, [])
 
   return (
-    <div className="grid lg:grid-cols-4 md:grid-cols-3 grid-cols gap-6 -mt-40 z-50 relative px-4">
+    <div className="grid xl:grid-cols-4 md:grid-cols-3 grid-cols gap-6 -mt-40 z-50 relative px-8">
         {products.slice(0,4).map((product) => (
             <Product
                 key={product.id}

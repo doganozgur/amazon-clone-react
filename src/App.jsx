@@ -5,9 +5,9 @@ import Checkout from "./pages/Checkout";
 
 function App() {
   return (
-    <div className=" bg-gray-100">
+    <div className="bg-gray-100">
       <Header />
-      <main className="max-w-screen-xl px-4 mx-auto my-14">
+      <main className="2xl:max-w-screen-2xl xl:max-w-screen-xl px-4 mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />
