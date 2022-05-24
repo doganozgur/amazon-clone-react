@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="bg-gray-100">
       <Header />
-      <main className="2xl:max-w-screen-2xl xl:max-w-screen-xl px-4 mx-auto">
+      <main className="2xl:max-w-screen-2xl xl:max-w-screen-xl sm:px-4 mx-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/checkout" element={<Checkout />} />

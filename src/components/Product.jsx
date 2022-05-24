@@ -24,9 +24,9 @@ function Product({ id, title, category, description, image, price, rating }) {
   return (
     <div className="flex flex-col bg-white shadow-xl p-8 relative h-full" key={id}>
       <small className="absolute right-2 top-2 opacity-60 text-sm">{category}</small>
-      <img src={image} alt={title} className="h-52 w-52 object-contain mb-4" />
+      <img src={image} alt={title} className="h-52 w-52 object-contain mb-4 mx-auto" />
       <h2 className="font-bold text-lg mb-4">{title}</h2>
-      <p className="flex mb-3 space-x-1">{Array(rating).fill(0).map((_, i) => <FaStar key={rating.count} className="text-yellow-500" />)}</p>
+      <p className="flex mb-3 space-x-1">{Array(rating).fill(0).map((_, i) => <FaStar className="text-yellow-500" />)}</p>
       <p className="line-clamp-3 text-xs mb-3">{description}</p>
       <p className="mb-3 font-bold">{"$" + price}</p>
       {hasPrime &&
