@@ -4,7 +4,6 @@ import "react-multi-carousel/lib/styles.css";
 import Product from './Product';
 
 export default function MobileCarousel({ products }) {
-    console.log(products);
     const responsive = {
         mobile: {
           breakpoint: { max: 640, min: 0 },

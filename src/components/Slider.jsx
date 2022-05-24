@@ -6,8 +6,21 @@ import SlideImgMobile2 from "../assets/slider/05-mobile.jpg";
 import SlideImgMobile3 from "../assets/slider/06-mobile.jpg";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { useState } from "react";
 
 function Slider() {
+    const [isMobile, setIsMobile] = useState(false)
+    useState(() => {
+        function handleResize() {
+            if(window.innerWidth >= 640){
+                setIsMobile(false)
+            } else {
+                setIsMobile(true)
+            }
+        }
+        handleResize()
+        window.addEventListener('resize', handleResize)
+    }, [])
   return (
     <div className="relative">
         <Carousel
@@ -22,13 +35,13 @@ function Slider() {
             showArrows={false}
         >
             <div>
-                <img src={SlideImgMobile1} srcSet={`${SlideImgMobile1} 768w, ${SlideImg1} 900w`} alt="Slide" />
+                <img src={isMobile ? SlideImgMobile1 : SlideImg1} alt="Slide" />
             </div>
-            <div>
-                <img src={SlideImgMobile2} srcSet={`${SlideImgMobile2} 768w, ${SlideImg2} 900w`} alt="Slide" />
+            <div>   
+                <img src={isMobile ? SlideImgMobile2 : SlideImg2} alt="Slide" />
             </div>
-            <div>
-                <img src={SlideImgMobile3} srcSet={`${SlideImgMobile3} 768w, ${SlideImg3} 900w`} alt="Slide" />
+            <div>   
+                <img src={isMobile ? SlideImgMobile3 : SlideImg3} alt="Slide" />
             </div>
         </Carousel>
         <div className="bg-gradient-to-t from-gray-50 to-transparent h-60 w-full absolute bottom-0 pointer-events-none z-1"></div>
