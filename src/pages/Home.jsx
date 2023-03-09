@@ -1,6 +1,5 @@
-import React from 'react'
-import ProductListing from '../components/ProductListing'
-import Slider from '../components/Slider'
+import ProductListing from "../components/ProductListing";
+import Slider from "../components/Slider";
 
 export default function Home() {
   return (
@@ -8,5 +7,5 @@ export default function Home() {
       <Slider />
       <ProductListing />
     </div>
-  )
+  );
 }
