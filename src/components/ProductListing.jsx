@@ -9,9 +9,9 @@ function ProductListing() {
 
   useEffect(() => {
     async function getProducts() {
-      const url = "https://fakestoreapi.com/products";
+      const url = process.env.REACT_APP_API_URL;
       const response = await axios.get(url);
-      await setProducts(response.data);
+      setProducts(response.data);
     }
     getProducts();
   }, []);
