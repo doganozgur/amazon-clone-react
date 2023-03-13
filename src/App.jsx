@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
-import Checkout from "./pages/Checkout";
 import Home from "./pages/Home";
+import Checkout from "./pages/Checkout";
 import Header from "./components/Header";
 
 function App() {

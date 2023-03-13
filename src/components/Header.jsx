@@ -1,12 +1,46 @@
 import { useSelector } from "react-redux";
 import { FaSearch, FaBars, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import Logo from "../assets/logo.png";
 
+import { auth, signInWithGooglePopup } from "../utils/firebase.config";
+import { signOut, onAuthStateChanged } from "firebase/auth";
+
 export default function Header() {
   const count = useSelector((state) => state.basket.items);
+  const [isLogged, setIsLogged] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const navigate = useNavigate();
+
+  // On user sign in & out changes
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setIsLogged(true);
+      } else {
+        setIsLogged(false);
+      }
+    });
+  }, []);
+
+  const signInWithGoogle = () => {
+    signInWithGooglePopup();
+  };
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  };
 
   return (
     <header className="flex flex-col">
@@ -23,10 +57,23 @@ export default function Header() {
             </Link>
           </div>
           <div className="flex sm:hidden items-center space-x-3">
-            <Link to="/" className="flex items-center text-white font-bold">
-              Sign In
-              <FaUserAlt className="ml-2 text-xl" />
-            </Link>
+            {isLogged ? (
+              <button
+                className="flex items-center text-white font-bold"
+                onClick={signInWithGoogle}
+              >
+                Hello, {auth.currentUser.displayName.split(" ")[0]}
+              </button>
+            ) : (
+              <button
+                className="flex items-center text-white font-bold"
+                onClick={signInWithGoogle}
+              >
+                Sign In
+                <FaUserAlt className="ml-2 text-xl" />
+              </button>
+            )}
+
             <Link
               to="/checkout"
               className="flex items-end text-white hoverOutline relative"
@@ -55,10 +102,25 @@ export default function Header() {
         {/* Right */}
         <div className="sm:flex items-center space-x-4 hidden">
           {/* Sign In */}
-          <Link to="/" className="flex flex-col text-white hoverOutline">
-            <span className="text-xs font-medium">Hello, Sign in</span>
-            <span className="text-sm font-bold">Account & Lists</span>
-          </Link>
+          {isLogged ? (
+            <button
+              className="flex flex-col text-white hoverOutline"
+              onClick={handleSignOut}
+            >
+              <span className="text-xs font-medium">
+                Hello, {auth.currentUser.displayName}
+              </span>
+              <span className="text-sm font-bold">Account & Lists</span>
+            </button>
+          ) : (
+            <button
+              className="flex flex-col text-white hoverOutline"
+              onClick={signInWithGoogle}
+            >
+              <span className="text-xs font-medium">Hello, Sign in</span>
+              <span className="text-sm font-bold">Account & Lists</span>
+            </button>
+          )}
           {/* Returns & Orders */}
           <Link to="/" className="flex flex-col text-white hoverOutline">
             <span className="text-xs font-medium">Returns</span>

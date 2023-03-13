@@ -5,9 +5,14 @@ import { useSelector } from "react-redux";
 import Banner from "../assets/banner2.png";
 import CheckoutItem from "../components/CheckoutItem";
 
-function Checkout() {
+export default function Checkout() {
   const checkoutProducts = useSelector((state) => state.basket.items);
-  const [signedIn] = useState(false);
+  const [isSigned] = useState(false);
+
+  // Get sub total of the cart items
+  const subTotal = checkoutProducts.reduce((total, currValue) => {
+    return total + currValue.price;
+  }, 0);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -28,9 +33,9 @@ function Checkout() {
       <div className="lg:basis-1/5 lg:ml-4 mt-5 lg:mt-0 bg-white p-4">
         <p className="mb-4 text-lg">
           Subtotal ({checkoutProducts.length > 0 ? checkoutProducts.length : 0}{" "}
-          items):
+          items): ${subTotal}
         </p>
-        {!signedIn ? (
+        {!isSigned ? (
           <Link to="/" className="btn w-full">
             Sign in to Checkout
           </Link>
@@ -41,5 +46,3 @@ function Checkout() {
     </div>
   );
 }
-
-export default Checkout;

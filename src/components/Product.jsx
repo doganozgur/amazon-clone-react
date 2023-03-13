@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import Prime from "../assets/prime.png";
 import { addToBasket } from "../features/basket/basketSlice";
 
-function Product({ data }) {
+export default function Product({ data }) {
   const { id, title, category, description, image, price, rating } = data;
   const [hasPrime] = useState(Math.random() < 0.5);
   const dispatch = useDispatch();
@@ -65,5 +65,3 @@ function Product({ data }) {
     </article>
   );
 }
-
-export default Product;

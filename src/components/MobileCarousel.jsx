@@ -12,18 +12,15 @@ export default function MobileCarousel({ products }) {
   };
 
   return (
-    <div>
-      <Carousel
-        responsive={responsive}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={3000}
-      >
-        {products.map((product) => (
-          <Product key={product.id} data={product} />
-        ))}
-      </Carousel>
-      ;
-    </div>
+    <Carousel
+      responsive={responsive}
+      infinite={true}
+      autoPlay={true}
+      autoPlaySpeed={3000}
+    >
+      {products.map((product) => (
+        <Product key={product.id} data={product} />
+      ))}
+    </Carousel>
   );
 }

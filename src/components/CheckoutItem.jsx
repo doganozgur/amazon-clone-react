@@ -4,7 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { removeFromBasket } from "../features/basket/basketSlice";
 
-function CheckoutItem({ data }) {
+export default function CheckoutItem({ data }) {
   const { id, title, description, image, price, rating } = data;
   const dispatch = useDispatch();
   const handleRemoveFromBasket = (id) => {
@@ -49,5 +49,3 @@ function CheckoutItem({ data }) {
     </article>
   );
 }
-
-export default CheckoutItem;
