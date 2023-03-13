@@ -1,40 +1,44 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaSearch, FaBars, FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import Logo from "../assets/logo.png";
 
 import { auth, signInWithGooglePopup } from "../utils/firebase.config";
 import { signOut, onAuthStateChanged } from "firebase/auth";
+import { selectItems } from "../features/basket/basketSlice";
+import { selectUser, setUser } from "../features/user/userSlice";
 
 export default function Header() {
-  const count = useSelector((state) => state.basket.items);
-  const [isLogged, setIsLogged] = useState(false);
-  const [user, setUser] = useState(null);
-
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  // On user sign in & out changes
+  const products = useSelector(selectItems);
+  const user = useSelector(selectUser);
+
+  // On user sign in & out state changes
   useEffect(() => {
+    let userInfo = {};
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
-        setIsLogged(true);
-      } else {
-        setIsLogged(false);
+        userInfo = {
+          accessToken: user.accessToken,
+          displayName: user.displayName,
+          email: user.email,
+          uid: user.uid,
+        };
+
+        dispatch(setUser(userInfo));
       }
     });
   }, []);
 
-  const signInWithGoogle = () => {
-    signInWithGooglePopup();
-  };
-
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
+        dispatch(setUser(null));
         navigate("/");
       })
       .catch((err) => {
@@ -45,7 +49,7 @@ export default function Header() {
   return (
     <header className="flex flex-col">
       {/* Top */}
-      <div className="flex sm:items-center flex-col sm:flex-row py-2 px-4 sm:space-x-6 bg-amazonDarkBlue">
+      <div className="flex sm:items-center flex-col sm:flex-row py-2 px-4 sm:space-x-6 bg-amazonDarkBlue space-y-2 sm:space-y-0">
         <div className="flex items-center justify-between">
           {/* Left */}
           <div className="flex py-1 sm:py-0">
@@ -56,30 +60,19 @@ export default function Header() {
               <img src={Logo} alt="Logo" className="sm:h-7 h-6" />
             </Link>
           </div>
-          <div className="flex sm:hidden items-center space-x-3">
-            {isLogged ? (
-              <button
-                className="flex items-center text-white font-bold"
-                onClick={signInWithGoogle}
-              >
-                Hello, {auth.currentUser.displayName.split(" ")[0]}
-              </button>
-            ) : (
-              <button
-                className="flex items-center text-white font-bold"
-                onClick={signInWithGoogle}
-              >
-                Sign In
-                <FaUserAlt className="ml-2 text-xl" />
-              </button>
-            )}
-
+          <div className="flex sm:hidden items-center space-x-8">
+            <button
+              className="flex items-center text-white text-sm"
+              onClick={!user ? signInWithGooglePopup : handleSignOut}
+            >
+              {user ? `Hello, ${user.displayName}` : "Sign In"}
+            </button>
             <Link
               to="/checkout"
               className="flex items-end text-white hoverOutline relative"
             >
               <span className="absolute top-0 left-3 bg-yellow-500 text-black rounded-full w-4 h-4 text-xs flex items-center justify-center">
-                {count.length}
+                {products.length}
               </span>
               <span className="text-xs font-medium">
                 <FaShoppingCart className="text-2xl mr-1" />
@@ -102,20 +95,20 @@ export default function Header() {
         {/* Right */}
         <div className="sm:flex items-center space-x-4 hidden">
           {/* Sign In */}
-          {isLogged ? (
+          {user ? (
             <button
               className="flex flex-col text-white hoverOutline"
               onClick={handleSignOut}
             >
               <span className="text-xs font-medium">
-                Hello, {auth.currentUser.displayName}
+                Hello, {user.displayName}
               </span>
               <span className="text-sm font-bold">Account & Lists</span>
             </button>
           ) : (
             <button
               className="flex flex-col text-white hoverOutline"
-              onClick={signInWithGoogle}
+              onClick={signInWithGooglePopup}
             >
               <span className="text-xs font-medium">Hello, Sign in</span>
               <span className="text-sm font-bold">Account & Lists</span>
@@ -132,7 +125,7 @@ export default function Header() {
             className="flex items-end text-white hoverOutline relative"
           >
             <span className="absolute top-0 left-3 bg-yellow-500 text-black rounded-full w-5 h-5 text-xs flex items-center justify-center">
-              {count.length}
+              {products.length}
             </span>
             <span className="text-xs font-medium">
               <BsCart3 className="text-3xl" />

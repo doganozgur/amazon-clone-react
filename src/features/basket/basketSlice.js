@@ -19,4 +19,12 @@ export const basketSlice = createSlice({
 
 export const { addToBasket, removeFromBasket } = basketSlice.actions;
 
+// Pull items from global store
+export const selectItems = (state) => state.basket.items;
+// Get sub total of the cart items
+export const selectTotal = (state) =>
+  state.basket.items.reduce((total, currValue) => {
+    return total + currValue.price;
+  }, 0);
+
 export default basketSlice.reducer;

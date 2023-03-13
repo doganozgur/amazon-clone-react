@@ -1,18 +1,17 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Banner from "../assets/banner2.png";
 import CheckoutItem from "../components/CheckoutItem";
+import { selectItems, selectTotal } from "../features/basket/basketSlice";
+import { selectUser } from "../features/user/userSlice";
+import { signInWithGooglePopup } from "../utils/firebase.config";
 
 export default function Checkout() {
-  const checkoutProducts = useSelector((state) => state.basket.items);
-  const [isSigned] = useState(false);
+  const checkoutProducts = useSelector(selectItems);
+  const user = useSelector(selectUser);
 
-  // Get sub total of the cart items
-  const subTotal = checkoutProducts.reduce((total, currValue) => {
-    return total + currValue.price;
-  }, 0);
+  const total = useSelector(selectTotal);
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -33,15 +32,14 @@ export default function Checkout() {
       <div className="lg:basis-1/5 lg:ml-4 mt-5 lg:mt-0 bg-white p-4">
         <p className="mb-4 text-lg">
           Subtotal ({checkoutProducts.length > 0 ? checkoutProducts.length : 0}{" "}
-          items): ${subTotal}
+          items): <strong>${total}</strong>
         </p>
-        {!isSigned ? (
-          <Link to="/" className="btn w-full">
-            Sign in to Checkout
-          </Link>
-        ) : (
-          <p>items</p>
-        )}
+        <button
+          onClick={user ? "" : signInWithGooglePopup}
+          className="btn w-full"
+        >
+          {user ? "Proceed to checkout" : "Sign in to checkout"}
+        </button>
       </div>
     </div>
   );
