@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
 import Header from "./components/Header";
 
-function App() {
+export default function App() {
   return (
     <div className="bg-gray-100">
       <Header />
@@ -17,5 +17,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

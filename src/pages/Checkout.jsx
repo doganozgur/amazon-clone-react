@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import Banner from "../assets/banner2.png";
@@ -15,6 +14,7 @@ export default function Checkout() {
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
+      {/* <PaymentElement /> */}
       {/* Left */}
       <div className="lg:basis-4/5 basis-full">
         <img src={Banner} alt="Banner" className="w-full mb-5" />
@@ -29,13 +29,13 @@ export default function Checkout() {
         </div>
       </div>
       {/* Right */}
-      <div className="lg:basis-1/5 lg:ml-4 mt-5 lg:mt-0 bg-white p-4">
+      <div className="lg:basis-1/5 lg:ml-4 mt-5 lg:mt-0 bg-white p-4 h-fit">
         <p className="mb-4 text-lg">
           Subtotal ({checkoutProducts.length > 0 ? checkoutProducts.length : 0}{" "}
           items): <strong>${total}</strong>
         </p>
         <button
-          onClick={user ? "" : signInWithGooglePopup}
+          onClick={user ? null : signInWithGooglePopup}
           className="btn w-full"
         >
           {user ? "Proceed to checkout" : "Sign in to checkout"}
