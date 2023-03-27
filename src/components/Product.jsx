@@ -54,7 +54,7 @@ export default function Product({ data }) {
       <p className="mb-3 font-bold">{"$" + price}</p>
       {hasPrime && (
         <div className="flex items-center mt-auto">
-          <img src={Prime} alt="Prime" className="w-14 mr-2" />
+          <img src={Prime} alt="Prime" className="w-12 h-12 mr-2" />
           <small className="opacity-70">FREE Nex-day delivery!</small>
         </div>
       )}

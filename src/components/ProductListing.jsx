@@ -24,7 +24,10 @@ export default function ProductListing() {
         {products?.slice(0, 4).map((product) => (
           <Product key={product.id} data={product} />
         ))}
-        <img src={Banner} alt="Banner" className="col-span-full" />
+        {products.length > 0 && (
+          <img src={Banner} alt="Banner" className="col-span-full h-60" />
+        )}
+
         <div className="md:col-span-2">
           {products?.slice(4, 5).map((product) => (
             <Product key={product.id} data={product} />

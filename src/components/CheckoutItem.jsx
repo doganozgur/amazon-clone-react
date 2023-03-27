@@ -1,6 +1,6 @@
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 import { removeFromBasket } from "../features/basket/basketSlice";
 
@@ -45,7 +45,6 @@ export default function CheckoutItem({ data }) {
           Remove from Basket
         </button>
       </div>
-      <Toaster />
     </article>
   );
 }

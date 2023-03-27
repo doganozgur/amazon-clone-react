@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 import Banner from "../assets/banner2.png";
@@ -17,7 +18,7 @@ export default function Checkout() {
       {/* <PaymentElement /> */}
       {/* Left */}
       <div className="lg:basis-4/5 basis-full">
-        <img src={Banner} alt="Banner" className="w-full mb-5" />
+        <img src={Banner} alt="Banner" className="w-full mb-5 h-[250px]" />
         <div className="bg-white p-4">
           <h2 className="text-4xl">Shopping Basket</h2>
           <hr className="my-4" />
@@ -41,6 +42,7 @@ export default function Checkout() {
           {user ? "Proceed to checkout" : "Sign in to checkout"}
         </button>
       </div>
+      <Toaster />
     </div>
   );
 }

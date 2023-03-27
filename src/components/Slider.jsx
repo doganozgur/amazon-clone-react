@@ -43,13 +43,25 @@ export default function Slider() {
         showArrows={true}
       >
         <div>
-          <img src={isMobile ? SlideImgMobile1 : SlideImg1} alt="" />
+          <img
+            className="h-[500px]"
+            src={isMobile ? SlideImgMobile1 : SlideImg1}
+            alt=""
+          />
         </div>
         <div>
-          <img src={isMobile ? SlideImgMobile2 : SlideImg2} alt="" />
+          <img
+            className="h-[500px]"
+            src={isMobile ? SlideImgMobile2 : SlideImg2}
+            alt=""
+          />
         </div>
         <div>
-          <img src={isMobile ? SlideImgMobile3 : SlideImg3} alt="" />
+          <img
+            className="h-[500px]"
+            src={isMobile ? SlideImgMobile3 : SlideImg3}
+            alt=""
+          />
         </div>
       </Carousel>
       <div className="bg-gradient-to-t from-gray-50 to-transparent h-60 w-full absolute bottom-0 pointer-events-none z-1"></div>

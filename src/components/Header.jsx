@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { FaSearch, FaBars, FaUserAlt, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaBars, FaShoppingCart } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -57,7 +57,11 @@ export default function Header() {
               <FaBars className="mr-1 text-2xl text-white" />
             </Link>
             <Link to="/" className="hoverOutline">
-              <img src={Logo} alt="Logo" className="sm:h-7 h-6" />
+              <img
+                src={Logo}
+                alt="Logo"
+                className="sm:h-7 h-6 w-24 object-contain"
+              />
             </Link>
           </div>
           <div className="flex sm:hidden items-center space-x-8">
