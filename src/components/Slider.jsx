@@ -44,21 +44,21 @@ export default function Slider() {
       >
         <div>
           <img
-            className="h-[500px]"
+            className={`${isMobile ? "h-[300px]" : "h-[500px]"} object-cover`}
             src={isMobile ? SlideImgMobile1 : SlideImg1}
             alt=""
           />
         </div>
         <div>
           <img
-            className="h-[500px]"
+            className={`${isMobile ? "h-[300px]" : "h-[500px]"} object-cover`}
             src={isMobile ? SlideImgMobile2 : SlideImg2}
             alt=""
           />
         </div>
         <div>
           <img
-            className="h-[500px]"
+            className={`${isMobile ? "h-[300px]" : "h-[500px]"} object-cover`}
             src={isMobile ? SlideImgMobile3 : SlideImg3}
             alt=""
           />
