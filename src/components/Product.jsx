@@ -2,13 +2,16 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 import Prime from "../assets/prime.png";
 import { addToBasket } from "../features/basket/basketSlice";
 
 export default function Product({ data }) {
   const { id, title, category, description, image, price, rating } = data;
+
   const [hasPrime] = useState(Math.random() < 0.5);
+
   const dispatch = useDispatch();
 
   const addItemToBasket = () => {
@@ -37,12 +40,16 @@ export default function Product({ data }) {
       <small className="absolute right-2 top-2 opacity-60 text-sm">
         {category}
       </small>
-      <img
-        src={image}
-        alt={title}
-        className="h-52 w-52 object-contain mb-4 mx-auto"
-      />
-      <h2 className="font-bold text-lg mb-4">{title}</h2>
+      <Link to={`/products/${id}`}>
+        <img
+          src={image}
+          alt={title}
+          className="h-52 w-52 object-contain mb-4 mx-auto"
+        />
+      </Link>
+      <Link to={`/products/${id}`}>
+        <h2 className="font-bold text-lg mb-4">{title}</h2>
+      </Link>
       <p className="flex mb-3 space-x-1">
         {Array(Math.round(rating?.rate))
           .fill(0)
