@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 import { addToBasket } from "../features/basket/basketSlice";
 import { getProducts } from "../utils/getProducts";
@@ -45,8 +46,15 @@ export default function ProductDetails() {
   };
 
   return (
-    <div className="h-screen">
-      <div className="bg-white p-12 m-8 shadow-xl flex items-center gap-12">
+    <div className="h-screen m-8">
+      <div className="flex space-x-4 mb-4 items-center">
+        <Link to="/" className="inline-flex text-orange-400">
+          <FaArrowLeft />
+        </Link>
+        <span className="text-gray-300">|</span>
+        <span className="font-semibold ">{title}</span>
+      </div>
+      <div className="bg-white p-12 shadow-xl flex items-center gap-12">
         {/* left */}
         <div className="flex-1">
           <img
