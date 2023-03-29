@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import toast, { Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import Prime from "../assets/prime.png";
@@ -25,11 +24,6 @@ export default function Product({ data }) {
       rating,
     };
     dispatch(addToBasket(product));
-    toast.success("Product added to the cart", {
-      style: {
-        boxShadow: "0 3px 3px rgb(0 0 0 / 2%), 0 1px 0px rgb(0 0 0 / 5%)",
-      },
-    });
   };
 
   return (
@@ -68,7 +62,6 @@ export default function Product({ data }) {
       <button className="mt-auto btn" onClick={addItemToBasket}>
         Add To Basket
       </button>
-      <Toaster />
     </article>
   );
 }

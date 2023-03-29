@@ -1,6 +1,5 @@
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
 import { removeFromBasket } from "../features/basket/basketSlice";
@@ -11,12 +10,6 @@ export default function CheckoutItem({ data }) {
   const dispatch = useDispatch();
 
   const handleRemoveFromBasket = (id) => {
-    toast("Product removed from the cart", {
-      icon: "🗑️",
-      style: {
-        boxShadow: "0 3px 3px rgb(0 0 0 / 2%), 0 1px 0px rgb(0 0 0 / 5%)",
-      },
-    });
     dispatch(removeFromBasket({ id }));
   };
 

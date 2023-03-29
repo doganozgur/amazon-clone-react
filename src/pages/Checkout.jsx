@@ -1,4 +1,3 @@
-import { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 
 import Banner from "../assets/banner2.png";
@@ -42,7 +41,6 @@ export default function Checkout() {
           {user ? "Proceed to checkout" : "Sign in to checkout"}
         </button>
       </div>
-      <Toaster />
     </div>
   );
 }

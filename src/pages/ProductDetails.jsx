@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
@@ -38,11 +37,6 @@ export default function ProductDetails() {
       rating,
     };
     dispatch(addToBasket(product));
-    toast.success("Product added to the cart", {
-      style: {
-        boxShadow: "0 3px 3px rgb(0 0 0 / 2%), 0 1px 0px rgb(0 0 0 / 5%)",
-      },
-    });
   };
 
   return (
@@ -80,7 +74,6 @@ export default function ProductDetails() {
           </div>
         )}
       </div>
-      <Toaster />
     </div>
   );
 }
