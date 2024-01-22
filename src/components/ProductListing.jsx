@@ -25,7 +25,11 @@ export default function ProductListing() {
           <Product key={product.id} data={product} />
         ))}
         {products.length > 0 && (
-          <img src={Banner} alt="Banner" className="col-span-full h-60" />
+          <img
+            src={Banner}
+            alt="Banner"
+            className="col-span-full h-60 w-full"
+          />
         )}
 
         <div className="md:col-span-2">
