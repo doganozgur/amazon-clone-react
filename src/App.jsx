@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 import Home from "./pages/Home";
 import Checkout from "./pages/Checkout";
@@ -18,6 +20,7 @@ export default function App() {
         </Routes>
       </main>
       <ScrollUp />
+      <ToastContainer />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { removeFromBasket } from "../features/basket/basketSlice";
+import { toast } from "react-toastify";
 
 export default function CheckoutItem({ data }) {
   const { id, title, description, image, price, rating } = data;
@@ -11,6 +12,7 @@ export default function CheckoutItem({ data }) {
 
   const handleRemoveFromBasket = (id) => {
     dispatch(removeFromBasket({ id }));
+    toast.success("Item removed from basket");
   };
 
   return (

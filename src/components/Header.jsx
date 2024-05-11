@@ -10,6 +10,7 @@ import { auth, signInWithGooglePopup } from "../utils/firebase.config";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { selectItems } from "../features/basket/basketSlice";
 import { selectUser, setUser } from "../features/user/userSlice";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -35,13 +36,21 @@ export default function Header() {
     });
   }, [dispatch]);
 
+  const handleSignIn = () => {
+    signInWithGooglePopup()
+      .then(() => toast.success("Signed in successfully"))
+      .catch(() => toast.error("Something went wrong"));
+  };
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         dispatch(setUser(null));
         navigate("/");
+        toast.success("Signed out successfully");
       })
       .catch((err) => {
+        toast.error("Something went wrong");
         throw new Error(err);
       });
   };
@@ -67,7 +76,7 @@ export default function Header() {
           <div className="flex sm:hidden items-center space-x-8">
             <button
               className="flex items-center text-white text-sm"
-              onClick={!user ? signInWithGooglePopup : handleSignOut}
+              onClick={!user ? handleSignIn : handleSignOut}
             >
               {user ? `Hello, ${user.displayName}` : "Sign In"}
             </button>
@@ -112,7 +121,7 @@ export default function Header() {
           ) : (
             <button
               className="flex flex-col text-white hoverOutline"
-              onClick={signInWithGooglePopup}
+              onClick={handleSignIn}
             >
               <span className="text-xs font-medium">Hello, Sign in</span>
               <span className="text-sm font-bold">Account & Lists</span>

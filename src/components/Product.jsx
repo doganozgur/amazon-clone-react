@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import Prime from "../assets/prime.png";
 import { addToBasket } from "../features/basket/basketSlice";
@@ -24,6 +25,9 @@ export default function Product({ data }) {
       rating,
     };
     dispatch(addToBasket(product));
+    toast.success("Product added to basket", {
+      position: "bottom-right",
+    });
   };
 
   return (

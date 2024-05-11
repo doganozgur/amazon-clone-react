@@ -5,12 +5,19 @@ import CheckoutItem from "../components/CheckoutItem";
 import { selectItems, selectTotal } from "../features/basket/basketSlice";
 import { selectUser } from "../features/user/userSlice";
 import { signInWithGooglePopup } from "../utils/firebase.config";
+import { toast } from "react-toastify";
 
 export default function Checkout() {
   const checkoutProducts = useSelector(selectItems);
   const user = useSelector(selectUser);
 
   const total = useSelector(selectTotal);
+
+  const handleSignIn = () => {
+    signInWithGooglePopup()
+      .then(() => toast.success("Signed in successfully"))
+      .catch(() => toast.error("Something went wrong"));
+  };
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen">
@@ -32,12 +39,9 @@ export default function Checkout() {
       <div className="lg:basis-1/5 lg:ml-4 mt-5 lg:mt-0 bg-white p-4 h-fit">
         <p className="mb-4 text-lg">
           Subtotal ({checkoutProducts.length > 0 ? checkoutProducts.length : 0}{" "}
-          items): <strong>${total}</strong>
+          items): <strong>${total?.toFixed(2)}</strong>
         </p>
-        <button
-          onClick={user ? null : signInWithGooglePopup}
-          className="btn w-full"
-        >
+        <button onClick={user ? null : handleSignIn} className="btn w-full">
           {user ? "Proceed to checkout" : "Sign in to checkout"}
         </button>
       </div>
