@@ -33,7 +33,7 @@ export default function Header() {
         dispatch(setUser(userInfo));
       }
     });
-  }, []);
+  }, [dispatch]);
 
   const handleSignOut = () => {
     signOut(auth)

@@ -15,9 +15,13 @@ I will with high possibility add more features in the upcoming days.
 
 Live [demo](https://react-amazon-clon.netlify.app/).
 
-To run this application in development mode:
+To run this application in development mode run below npm command to install project's dependencies:
 
 #### `npm install`
+
+You will then need to provide two environment variables. One is `REACT_APP_API_URL` which is Fake Store API products url and the other one is `REACT_APP_FIREBASE_API_KEY` which Firebase Web API Key.
+
+After providing environment variables you can start the project by running:
 
 #### `npm start`
 
